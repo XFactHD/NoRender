@@ -5,9 +5,7 @@ import net.minecraft.client.KeyMapping;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.player.Input;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.ClientRegistry;
-import net.minecraftforge.client.event.MovementInputUpdateEvent;
-import net.minecraftforge.client.event.ScreenOpenEvent;
+import net.minecraftforge.client.event.*;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.TickEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -36,8 +34,12 @@ public class ClientEventHandler
         MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::onClientTick);
         MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::onMovementUpdate);
         MinecraftForge.EVENT_BUS.addListener(ClientEventHandler::onScreenClose);
+    }
 
-        ClientRegistry.registerKeyBinding(NO_RENDER_KEY.get());
+    @SubscribeEvent
+    public static void onRegisterKeyMappings(final RegisterKeyMappingsEvent event)
+    {
+        event.register(NO_RENDER_KEY.get());
     }
 
     private static void onClientTick(final TickEvent.ClientTickEvent event)
@@ -96,9 +98,9 @@ public class ClientEventHandler
         }
     }
 
-    private static void onScreenClose(final ScreenOpenEvent event)
+    private static void onScreenClose(final ScreenEvent.Closing event)
     {
-        if (Minecraft.getInstance().noRender && event.getScreen() == null)
+        if (Minecraft.getInstance().noRender)
         {
             // Resetting the flag when opening a screen is handled by MC
             Minecraft.getInstance().noRender = false;
