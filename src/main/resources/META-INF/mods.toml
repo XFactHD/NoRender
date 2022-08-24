@@ -1,6 +1,6 @@
 modLoader="javafml"
 loaderVersion="[39,)"
-license="LGPLv2"
+license="LGPLv3"
 issueTrackerURL="https://github.com/xfacthd/norender/"
 
 [[mods]]
@@ -10,8 +10,8 @@ issueTrackerURL="https://github.com/xfacthd/norender/"
 	#updateJSONURL="https://change.me.example.invalid/updates.json"
 	#displayURL="https://change.me.to.your.mods.homepage.example.invalid/"
 	logoFile="logo.png"
-	credits="Thanks for this example mod goes to Java"
-	authors="Love, Cheese and small house plants"
+	#credits="Thanks for this example mod goes to Java"
+	authors="XFactHD"
 	description='''
 	'''
 
