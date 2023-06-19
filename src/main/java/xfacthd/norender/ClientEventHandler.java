@@ -20,7 +20,7 @@ import java.util.Map;
 import java.util.function.Supplier;
 
 @Mod.EventBusSubscriber(modid = NoRender.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD, value = Dist.CLIENT)
-public class ClientEventHandler
+public final class ClientEventHandler
 {
     private static final Supplier<KeyMapping> NO_RENDER_KEY = Suppliers.memoize(
             () -> new KeyMapping("key.norender.switch_render", GLFW.GLFW_KEY_F12, "key.categories.misc")
@@ -44,7 +44,10 @@ public class ClientEventHandler
 
     private static void onClientTick(final TickEvent.ClientTickEvent event)
     {
-        if (event.phase != TickEvent.Phase.START) { return; }
+        if (event.phase != TickEvent.Phase.START)
+        {
+            return;
+        }
 
         if (Minecraft.getInstance().level != null && NO_RENDER_KEY.get().consumeClick())
         {
@@ -124,4 +127,8 @@ public class ClientEventHandler
             throw new RuntimeException("Failed to reflect KeyMapping fields", e);
         }
     }
+
+
+
+    private ClientEventHandler() { }
 }
